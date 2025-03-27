@@ -16,6 +16,14 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["development"]
+    "customConditions": ["development"],
+    "paths": {
+      "dashboard/Module": ["dashboard/src/remote-entry.ts"],
+      "details/Module": ["details/src/remote-entry.ts"],
+      "job/Module": ["job/src/remote-entry.ts"],
+      "list/Module": ["nx-mf-integration/src/remote-entry.ts"],
+      "login/Module": ["login/src/remote-entry.ts"]
+    },
+    "baseUrl": "."
   }
 }

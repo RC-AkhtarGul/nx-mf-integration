@@ -1,0 +1,28 @@
+{
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "../dashboard"
+    },
+    {
+      "path": "../login"
+    },
+    {
+      "path": "../nx-mf-integration"
+    },
+    {
+      "path": "../details"
+    },
+    {
+      "path": "../job"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ],
+  "extends": "../tsconfig.base.json"
+}

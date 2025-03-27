@@ -1,0 +1,10 @@
+{
+  "name": "@nx-mf-integration/shell-e2e",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "shell-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["@nx-mf-integration/shell"],
+  "// targets": "to see all targets run: nx show project @nx-mf-integration/shell-e2e --web",
+  "targets": {}
+}

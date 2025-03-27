@@ -8,6 +8,45 @@
     },
     {
       "path": "./apps/nx-mf-integration"
+    },
+    {
+      "path": "./shell-e2e"
+    },
+    {
+      "path": "./shell"
+    },
+    {
+      "path": "./login-e2e"
+    },
+    {
+      "path": "./login"
+    },
+    {
+      "path": "./dashboard-e2e"
+    },
+    {
+      "path": "./dashboard"
+    },
+    {
+      "path": "./auth-store"
+    },
+    {
+      "path": "./nx-mf-integration-e2e"
+    },
+    {
+      "path": "./nx-mf-integration"
+    },
+    {
+      "path": "./details-e2e"
+    },
+    {
+      "path": "./details"
+    },
+    {
+      "path": "./job-e2e"
+    },
+    {
+      "path": "./job"
     }
   ]
 }

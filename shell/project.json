@@ -1,0 +1,87 @@
+{
+  "name": "@nx-mf-integration/shell",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "shell/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/rspack:rspack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "shell/dist",
+        "index": "shell/src/index.html",
+        "baseHref": "/",
+        "main": "shell/src/main.ts",
+        "tsConfig": "shell/tsconfig.app.json",
+        "assets": ["shell/src/favicon.ico", "shell/src/assets"],
+        "rspackConfig": "shell/rspack.config.ts",
+        "styles": ["shell/src/styles.css"],
+        "scripts": [],
+        "configurations": {
+          "development": {
+            "mode": "development"
+          },
+          "production": {
+            "mode": "production",
+            "optimization": true,
+            "sourceMap": false,
+            "outputHashing": "all",
+            "namedChunks": false,
+            "extractLicenses": true,
+            "vendorChunk": false
+          }
+        },
+        "target": "web"
+      },
+      "configurations": {
+        "production": {
+          "rspackConfig": "shell/rspack.config.prod.ts"
+        }
+      },
+      "dependsOn": ["^build", "typecheck"]
+    },
+    "serve": {
+      "executor": "@nx/rspack:module-federation-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "@nx-mf-integration/shell:build",
+        "hmr": true,
+        "port": 4200
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "@nx-mf-integration/shell:build:development"
+        },
+        "production": {
+          "buildTarget": "@nx-mf-integration/shell:build:production",
+          "hmr": false
+        }
+      },
+      "dependsOn": ["typecheck"]
+    },
+    "serve-static": {
+      "executor": "@nx/rspack:module-federation-static-server",
+      "defaultConfiguration": "production",
+      "options": {
+        "serveTarget": "@nx-mf-integration/shell:serve"
+      },
+      "configurations": {
+        "development": {
+          "serveTarget": "@nx-mf-integration/shell:serve:development"
+        },
+        "production": {
+          "serveTarget": "@nx-mf-integration/shell:serve:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{projectRoot}/test-output/jest/coverage"],
+      "options": {
+        "jestConfig": "shell/jest.config.ts"
+      }
+    }
+  }
+}

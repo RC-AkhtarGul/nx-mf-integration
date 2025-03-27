@@ -1,0 +1,96 @@
+{
+  "name": "list",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "nx-mf-integration/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/rspack:rspack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "nx-mf-integration/dist",
+        "index": "nx-mf-integration/src/index.html",
+        "baseHref": "/",
+        "main": "nx-mf-integration/src/main.ts",
+        "tsConfig": "nx-mf-integration/tsconfig.app.json",
+        "assets": [
+          "nx-mf-integration/src/favicon.ico",
+          "nx-mf-integration/src/assets",
+          {
+           "input": "nx-mf-integration/public",
+           "glob": "**/*",
+           "output": "."
+         }
+        ],
+
+        "rspackConfig": "nx-mf-integration/rspack.config.ts",
+        "styles": ["nx-mf-integration/src/styles.css"],
+        "scripts": [],
+        "configurations": {
+          "development": {
+            "mode": "development"
+          },
+          "production": {
+            "mode": "production",
+            "optimization": true,
+            "sourceMap": false,
+            "outputHashing": "all",
+            "namedChunks": false,
+            "extractLicenses": true,
+            "vendorChunk": false
+          }
+        },
+        "target": "web"
+      },
+      "configurations": {
+        "production": {
+          "rspackConfig": "nx-mf-integration/rspack.config.prod.ts"
+        }
+      },
+      "dependsOn": ["^build", "typecheck"]
+    },
+    "serve": {
+      "executor": "@nx/rspack:module-federation-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "list:build",
+        "hmr": true,
+        "port": 4203
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "list:build:development"
+        },
+        "production": {
+          "buildTarget": "list:build:production",
+          "hmr": false
+        }
+      },
+      "dependsOn": ["typecheck"]
+    },
+    "serve-static": {
+      "executor": "@nx/rspack:module-federation-static-server",
+      "defaultConfiguration": "production",
+      "options": {
+        "serveTarget": "list:serve"
+      },
+      "configurations": {
+        "development": {
+          "serveTarget": "list:serve:development"
+        },
+        "production": {
+          "serveTarget": "list:serve:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{projectRoot}/test-output/jest/coverage"],
+      "options": {
+        "jestConfig": "nx-mf-integration/jest.config.ts"
+      }
+    }
+  }
+}
