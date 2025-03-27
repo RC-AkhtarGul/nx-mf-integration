@@ -58,7 +58,7 @@ nx run-many --target=build --projects=shell,dashboard,job,details,list,login --p
 
 ## Adding CORS Policy for Production
 
-1. Create a `public` folder.
+1. Create a `public` folder on each remote project.
 2. Add a `_header` file inside the `public` folder.
 3. Update the `project.json` file to include the `public` folder in the assets:
 
